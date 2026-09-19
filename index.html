@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Teacher Registration</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(145deg, #dfe4ea, #f5f7fa);
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    perspective: 1200px;
+  }
+
+  .container {
+    background: #eef1f5;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 20px;
+    padding: 30px 32px;
+    box-shadow:
+      12px 12px 24px rgba(163,177,198,0.6),
+      -12px -12px 24px rgba(255,255,255,0.8),
+      inset 0 0 0 rgba(0,0,0,0);
+    transform: rotateX(1deg);
+    transition: transform 0.3s ease;
+  }
+  .container:hover { transform: rotateX(0deg); }
+
+  h1 {
+    text-align: center;
+    color: #2d3436;
+    margin-bottom: 26px;
+    font-size: 28px;
+    text-shadow: 1px 1px 0 #fff, 2px 2px 4px rgba(0,0,0,0.1);
+  }
+
+  form { margin-bottom: 10px; }
+  .row-2 { display: flex; gap: 16px; flex-wrap: wrap; }
+  .row-2 .input-group { flex: 1; min-width: 140px; }
+  .input-group { margin-bottom: 16px; }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+  }
+
+  input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 11px 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #eef1f5;
+    box-shadow:
+      inset 5px 5px 10px rgba(163,177,198,0.6),
+      inset -5px -5px 10px rgba(255,255,255,0.8);
+    transition: box-shadow 0.2s ease;
+  }
+  input:focus, select:focus {
+    outline: none;
+    box-shadow:
+      inset 6px 6px 12px rgba(163,177,198,0.7),
+      inset -6px -6px 12px rgba(255,255,255,0.9),
+      0 0 0 3px rgba(108,92,231,0.25);
+  }
+
+  .btn-row { display: flex; gap: 14px; }
+
+  button {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 4px;
+    color: #fff;
+    letter-spacing: 0.3px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  button:active {
+    transform: translateY(3px);
+    box-shadow: none !important;
+  }
+
+  #buttonbtn {
+    background: linear-gradient(145deg, #7d6cf0, #6c5ce7);
+    box-shadow:
+      6px 6px 12px rgba(108,92,231,0.4),
+      -4px -4px 10px rgba(255,255,255,0.6),
+      0 4px 0 #5142c4;
+  }
+  #buttonbtn:hover { filter: brightness(1.05); }
+
+  #updatebtn {
+    background: linear-gradient(145deg, #10c98f, #00b894);
+    box-shadow:
+      6px 6px 12px rgba(0,184,148,0.4),
+      -4px -4px 10px rgba(255,255,255,0.6),
+      0 4px 0 #058c6d;
+  }
+  #updatebtn:hover { filter: brightness(1.05); }
+
+  .section-label {
+    margin-top: 34px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #9aa0a8;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #deleteallbtn {
+    width: auto;
+    padding: 8px 16px;
+    background: linear-gradient(145deg, #e0574a, #c0392b);
+    margin: 0;
+    font-size: 12px;
+    border-radius: 10px;
+    box-shadow:
+      4px 4px 10px rgba(192,57,43,0.4),
+      -3px -3px 8px rgba(255,255,255,0.5),
+      0 3px 0 #942d21;
+  }
+  #deleteallbtn:hover { filter: brightness(1.05); }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    font-size: 14px;
+  }
+
+  thead th {
+    text-align: left;
+    background: linear-gradient(145deg, #7d6cf0, #6c5ce7);
+    color: #fff;
+    padding: 12px 14px;
+    font-weight: 600;
+  }
+  thead th:first-child { border-radius: 10px 0 0 10px; }
+  thead th:last-child { border-radius: 0 10px 10px 0; }
+
+  tbody tr {
+    background: #eef1f5;
+    box-shadow:
+      6px 6px 14px rgba(163,177,198,0.5),
+      -6px -6px 14px rgba(255,255,255,0.8);
+    border-radius: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  tbody tr:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow:
+      10px 10px 20px rgba(163,177,198,0.6),
+      -10px -10px 20px rgba(255,255,255,0.9);
+  }
+
+  tbody td {
+    padding: 14px;
+    vertical-align: middle;
+    color: #2d3436;
+  }
+  tbody td:first-child { border-radius: 12px 0 0 12px; }
+  tbody td:last-child { border-radius: 0 12px 12px 0; }
+
+  td.col-action { white-space: nowrap; }
+  td.col-action button {
+    flex: none;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 6px;
+    margin-top: 0;
+    cursor: pointer;
+  }
+
+  .btn-edit {
+    background: linear-gradient(145deg, #a3f3bb, #7ee89e);
+    color: #16794e;
+    box-shadow: 0 3px 0 #4fae72, 2px 2px 6px rgba(0,0,0,0.1);
+  }
+  .btn-edit:active { transform: translateY(2px); box-shadow: none; }
+
+  .btn-delete {
+    background: linear-gradient(145deg, #ffb3b3, #ff9d9d);
+    color: #c0392b;
+    box-shadow: 0 3px 0 #d16b6b, 2px 2px 6px rgba(0,0,0,0.1);
+  }
+  .btn-delete:active { transform: translateY(2px); box-shadow: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>👩‍🏫 Teacher Registration</h1>
+
+  <form>
+    <div class="input-group">
+      <label for="teacherName">Name</label>
+      <input type="text" id="teacherName" placeholder="Enter teacher name">
+    </div>
+
+    <div class="row-2">
+      <div class="input-group">
+        <label for="teacherSalary">Salary</label>
+        <input type="number" id="teacherSalary" placeholder="Salary">
+      </div>
+      <div class="input-group">
+        <label for="teacherSubject">Subject</label>
+        <input type="text" id="teacherSubject" placeholder="Subject">
+      </div>
+      <div class="input-group">
+        <label for="teacherCity">City</label>
+        <input type="text" id="teacherCity" placeholder="City">
+      </div>
+      <div class="input-group">
+        <label for="teacherGender">Gender</label>
+        <select id="teacherGender">
+          <option value="">Select</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <input type="text" id="teacherid" style="display:none;">
+
+    <div class="btn-row">
+      <button id="buttonbtn" type="button">Add</button>
+      <button id="updatebtn" type="button">Update</button>
+    </div>
+  </form>
+
+  <div class="section-label">
+    <span>Teachers</span>
+    <button id="deleteallbtn" type="button">Remove All</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Salary</th>
+        <th>Subject</th>
+        <th>City</th>
+        <th>Gender</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<script>
+const API = 'http://localhost:5000';
+
+// read
+async function readteacher() {
+  let body = document.getElementById('tbody');
+  let response = await fetch(`${API}/readteacher`);
+  let result = await response.json();
+
+  if (!Array.isArray(result)) {
+    body.innerHTML = '<tr><td colspan="6">No teachers found</td></tr>';
+    return;
+  }
+
+  if (result.length === 0) {
+    body.innerHTML = '<tr><td colspan="6">No teachers yet</td></tr>';
+    return;
+  }
+
+  let row = '';
+  for (let i = 0; i < result.length; i++) {
+    let t = result[i];
+    row += `
+    <tr>
+      <td>${t.name}</td>
+      <td>${t.salary ?? ''}</td>
+      <td>${t.subject ?? ''}</td>
+      <td>${t.city ?? ''}</td>
+      <td>${t.gender ?? ''}</td>
+      <td class="col-action">
+        <button class="btn-edit" onclick="loadTeacherToForm(${t.id})">Edit</button>
+        <button class="btn-delete" onclick="deleteteacher(${t.id})">Delete</button>
+      </td>
+    </tr>`;
+  }
+  body.innerHTML = row;
+}
+readteacher();
+
+// add
+document.getElementById('buttonbtn').addEventListener('click', async () => {
+  let name = document.getElementById('teacherName').value.trim();
+  let salary = document.getElementById('teacherSalary').value;
+  let subject = document.getElementById('teacherSubject').value.trim();
+  let city = document.getElementById('teacherCity').value.trim();
+  let gender = document.getElementById('teacherGender').value;
+
+  if (!name) {
+    alert('Name is required');
+    return;
+  }
+
+  let response = await fetch(`${API}/addteacher`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      salary: salary ? Number(salary) : null,
+      subject,
+      city,
+      gender
+    })
+  });
+  let result = await response.text();
+
+  if (result === 'teacher added') {
+    clearForm();
+    readteacher();
+  } else {
+    alert('Failed to add teacher');
+  }
+});
+
+// delete
+async function deleteteacher(id) {
+  if (!confirm('Delete this teacher?')) return;
+
+  let response = await fetch(`${API}/deleteteacher`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id })
+  });
+  let result = await response.text();
+
+  if (result === 'teacher deleted') {
+    readteacher();
+  } else {
+    alert('Failed to delete teacher');
+  }
+}
+
+// delete all
+document.getElementById('deleteallbtn').addEventListener('click', async () => {
+  if (!confirm('Delete ALL teachers? This cannot be undone.')) return;
+
+  let response = await fetch(`${API}/deleteallteachers`, {
+    method: 'POST'
+  });
+  let result = await response.text();
+
+  if (result === 'all teachers deleted') {
+    readteacher();
+  } else {
+    alert('Failed to delete all teachers');
+  }
+});
+
+// update
+document.getElementById('updatebtn').addEventListener('click', async () => {
+  let name = document.getElementById('teacherName').value.trim();
+  let salary = document.getElementById('teacherSalary').value;
+  let subject = document.getElementById('teacherSubject').value.trim();
+  let city = document.getElementById('teacherCity').value.trim();
+  let gender = document.getElementById('teacherGender').value;
+  let id = document.getElementById('teacherid').value;
+
+  if (!id) {
+    alert('Click Edit on a row first to select a teacher');
+    return;
+  }
+
+  let response = await fetch(`${API}/updateteacher`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      salary: salary ? Number(salary) : null,
+      subject,
+      city,
+      gender,
+      id
+    })
+  });
+  let result = await response.text();
+
+  if (result === 'teacher update') {
+    clearForm();
+    readteacher();
+  } else {
+    alert('Failed to update teacher');
+  }
+});
+
+// load one teacher into the form for editing
+async function loadTeacherToForm(id) {
+  let response = await fetch(`${API}/updatesingleteacher`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id })
+  });
+  let result = await response.json();
+
+  if (!Array.isArray(result) || result.length === 0) {
+    alert('Teacher not found');
+    return;
+  }
+
+  let t = result[0];
+  document.getElementById('teacherName').value = t.name ?? '';
+  document.getElementById('teacherSalary').value = t.salary ?? '';
+  document.getElementById('teacherSubject').value = t.subject ?? '';
+  document.getElementById('teacherCity').value = t.city ?? '';
+  document.getElementById('teacherGender').value = t.gender ?? '';
+  document.getElementById('teacherid').value = t.id;
+}
+
+function clearForm() {
+  document.getElementById('teacherName').value = '';
+  document.getElementById('teacherSalary').value = '';
+  document.getElementById('teacherSubject').value = '';
+  document.getElementById('teacherCity').value = '';
+  document.getElementById('teacherGender').value = '';
+  document.getElementById('teacherid').value = '';
+}
+</script>
+</body>
+</html>
