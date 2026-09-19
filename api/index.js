@@ -6,8 +6,8 @@ app.use(express.json());
 require('dotenv').config();
 let { createClient } = require("@supabase/supabase-js");
 
-let supabaseurl = process.env.SUPABASEURL;
-let supabasekey = process.env.SUPABASEKEY;
+let supabaseurl = process.env.SUPABASE_URL;
+let supabasekey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 let supabase = createClient(supabaseurl, supabasekey)
 
