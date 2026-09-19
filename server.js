@@ -9,11 +9,6 @@ let { createClient } = require("@supabase/supabase-js");
 let supabaseurl = process.env.SUPABASEURL;
 let supabasekey = process.env.SUPABASEKEY;
 
-if (!supabaseurl || !supabasekey) {
-  console.error('Missing SUPABASEURL or SUPABASEKEY in .env');
-  process.exit(1);
-}
-
 let supabase = createClient(supabaseurl, supabasekey)
 
 // read all teachers
@@ -124,4 +119,4 @@ app.post('/updatesingleteacher', async (req, res) => {
   res.json(data)
 })
 
-app.listen(5000, () => console.log('server running on port 5000'));
+module.exports = app
